@@ -17,4 +17,4 @@ This project requires:
 
 > docker-compose up
 
-    * After running check your browse acessing localhost, for default is configured to access port 80
+    * After running check your browse acessing __localhost__, for default is configured to access port 80.
