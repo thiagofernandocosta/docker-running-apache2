@@ -1,0 +1,35 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+#Usefull all necessary tools for the image
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    wget \
+    vim \
+
+#install the needed apache modules
+ && a2enmod expires \
+ && a2enmod proxy \
+ && a2enmod proxy_http \
+ && a2enmod rewrite \
+ && a2enmod deflate \
+ && a2enmod headers
+
+
+#Copy the apache config to enable dispatcher and the pagespeed conf file to allow access to the admin pages
+COPY resources/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY resources/apache2.conf /etc/apache2/apache2.conf
+COPY resources/pagespeed.conf /etc/apache2/mods-enabled/pagespeed.conf
+
+ADD . /var/www/html 
+RUN rm -rf /var/www/html/dist && \
+    rm -rf /var/www/html/docker && \
+    rm -rf /var/www/html/ci && \
+    rm -rf /var/www/html/resources
+
+CMD ["/bin/bash","apache2ctl","-DFOREGROUND"]
+
+EXPOSE 80 443
+
+
