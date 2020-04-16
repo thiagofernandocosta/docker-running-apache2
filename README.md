@@ -13,8 +13,8 @@ This project requires:
 
 
 ## Running
-    * After installing Docker and Docker-compose just run the following command:
+  * After installing Docker and Docker-compose just run the following command:
 
 > docker-compose up
 
-    * After running check your browse acessing __localhost__, for default is configured to access port 80.
+  * After running check your browse acessing __localhost__, for default is configured to access port 80.
